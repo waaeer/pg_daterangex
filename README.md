@@ -1,7 +1,7 @@
 # pg_daterangex
 PostgreSQL extension defining daterange type with inclusive upper limit
 
-daterange type is by default output with non-exclusive upper range. This extension is the same but with inclusive upper range.
+The daterange type is by default output with non-exclusive upper range. This extension is the same but with inclusive upper range.
 See example: 
 
 ```
@@ -15,4 +15,10 @@ SELECT daterangex('[2024-01-01,2024-06-01]');
        daterangex        
 -------------------------
  [2024-01-01,2024-06-01]
+```
+
+## Building
+
+```
+USE_PGXS=1 PG_CONFIG=/path_to_pgconfig make install
 ```

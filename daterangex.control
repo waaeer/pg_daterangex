@@ -1,0 +1,7 @@
+# daterangex extension
+comment = 'adterange with inclusive upper bound'
+default_version = '1.0'
+module_pathname = '$libdir/daterangex'
+relocatable = true
+trusted = true
+
