@@ -43,7 +43,8 @@ daterangex_canonical(PG_FUNCTION_ARGS)
 		DateADT		bnd = DatumGetDateADT(upper.val);
 
 		/* Check for overflow -- note we already eliminated PG_INT32_MAX */
-		bnd++;
+		bnd--;
+//		elog(WARNING, "bnd=%ld\n", bnd);
 		if (unlikely(!IS_VALID_DATE(bnd)))
 			ereturn(escontext, (Datum) 0,
 					(errcode(ERRCODE_DATETIME_VALUE_OUT_OF_RANGE),
