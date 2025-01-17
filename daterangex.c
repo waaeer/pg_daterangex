@@ -1,6 +1,8 @@
 #include "postgres.h"
 #include "utils/rangetypes.h"
 #include "utils/date.h"
+#include "utils/fmgrprotos.h"
+
 PG_MODULE_MAGIC;
 
 PG_FUNCTION_INFO_V1(daterangex_canonical);
@@ -27,7 +29,6 @@ daterangex_canonical(PG_FUNCTION_ARGS)
 	{
 		DateADT		bnd = DatumGetDateADT(lower.val);
 
-		/* Check for overflow -- note we already eliminated PG_INT32_MAX */
 		bnd++;
 		if (unlikely(!IS_VALID_DATE(bnd)))
 			ereturn(escontext, (Datum) 0,
@@ -42,9 +43,7 @@ daterangex_canonical(PG_FUNCTION_ARGS)
 	{
 		DateADT		bnd = DatumGetDateADT(upper.val);
 
-		/* Check for overflow -- note we already eliminated PG_INT32_MAX */
 		bnd--;
-//		elog(WARNING, "bnd=%ld\n", bnd);
 		if (unlikely(!IS_VALID_DATE(bnd)))
 			ereturn(escontext, (Datum) 0,
 					(errcode(ERRCODE_DATETIME_VALUE_OUT_OF_RANGE),
@@ -56,3 +55,16 @@ daterangex_canonical(PG_FUNCTION_ARGS)
 	PG_RETURN_RANGE_P(range_serialize(typcache, &lower, &upper,
 									  false, escontext));
 }
+
+PG_FUNCTION_INFO_V1(daterangex_to_daterange);
+
+Datum
+daterangex_to_daterange(PG_FUNCTION_ARGS)
+{
+	return daterange_canonical(fcinfo);
+}
+
+
+
+
+

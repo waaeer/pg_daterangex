@@ -1,5 +1,5 @@
 # pg_daterangex
-PostgreSQL extension defining daterange type with inclusive upper limit
+PostgreSQL extension defining a daterange type with inclusive upper limit
 
 The daterange type is by default output with non-exclusive upper range. This extension is the same but with inclusive upper range.
 See example: 
