@@ -35,3 +35,13 @@ SELECT '[2025-01-01,2025-02-02)'::daterangex::daterange;
  [01-01-2025,02-02-2025)
 (1 row)
 
+CREATE TABLE x (y daterangex);
+INSERT INTO x SELECT daterangex(d::date, (d + '1month'::interval)::date, '[]') FROM generate_series('2015-01-01'::date,'2025-02-02', '1day') d;
+INSERT INTO x SELECT daterangex(d::date, NULL::date, '[)') FROM generate_series('2015-01-01'::date,'2025-02-02', '1day') d;
+SELECT COUNT(*) FROM x;
+ count 
+-------
+  7372
+(1 row)
+
+CREATE INDEX ON x USING gist (y);
