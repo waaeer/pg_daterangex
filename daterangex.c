@@ -56,23 +56,6 @@ daterangex_canonical(PG_FUNCTION_ARGS)
 									  false, escontext));
 }
 
-PG_FUNCTION_INFO_V1(daterangex_to_daterange);
-
-Datum
-daterangex_to_daterange(PG_FUNCTION_ARGS)
-{
-	return daterange_canonical(fcinfo);
-}
-
-PG_FUNCTION_INFO_V1(daterange_to_daterangex);
-
-Datum
-daterange_to_daterangex(PG_FUNCTION_ARGS)
-{	
-	RangeType  *r = PG_GETARG_RANGE_P(0);
-	RangeTypeGetOid(r) = 2246043;
-	return daterangex_canonical(fcinfo);
-}
 
 
 
