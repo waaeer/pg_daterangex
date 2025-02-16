@@ -45,3 +45,4 @@ SELECT COUNT(*) FROM x;
 (1 row)
 
 CREATE INDEX ON x USING gist (y);
+INSERT INTO x SELECT '[2024-01-01,)'::daterange::daterangex;
